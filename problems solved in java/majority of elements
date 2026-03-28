@@ -1,0 +1,33 @@
+import java.util.Scanner;
+public class majorityofelement{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+
+        }
+        int count;
+        int max=0;
+        int maxval=arr[0];
+        for(int i=0;i<n;i++){
+            count=0;
+            for(int j=0;j<n;j++){
+                if(arr[i]==arr[j]){
+                    count++;
+                }
+            }
+            if(count>max){
+                max=count;
+                maxval=arr[i];
+            }
+        }
+    if(max>n/2){
+        System.out.print(maxval);
+    }
+    else{
+        System.out.print("no majority element found");
+    }
+}
+}
