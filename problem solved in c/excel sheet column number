@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<string.h>
+
+int main(){
+    char ch[100];
+    scanf("%s",ch);
+    int res=0;
+    int len=strlen(ch);
+    for(int i=0;i<len;i++){
+        if(ch[i]>='A' && ch[i]<='Z'){
+            res=res*26+ch[i]-'A'+1;
+        }
+    }
+    printf("%d",res);
+    return 0;
+}
