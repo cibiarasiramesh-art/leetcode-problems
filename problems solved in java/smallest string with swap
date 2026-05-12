@@ -1,0 +1,70 @@
+class Solution {
+    
+    class DSU {
+        int[] parent;
+        
+        DSU(int n) {
+            parent = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+            }
+        }
+        
+        int find(int x) {
+            if (parent[x] != x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        }
+        
+        void union(int x, int y) {
+            int px = find(x);
+            int py = find(y);
+            
+            if (px != py) {
+                parent[py] = px;
+            }
+        }
+    }
+    
+    public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+        
+        int n = s.length();
+        DSU dsu = new DSU(n);
+        
+        // Connect indices
+        for (List<Integer> pair : pairs) {
+            dsu.union(pair.get(0), pair.get(1));
+        }
+        
+        // Group indices by parent
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        
+        for (int i = 0; i < n; i++) {
+            int parent = dsu.find(i);
+            map.putIfAbsent(parent, new ArrayList<>());
+            map.get(parent).add(i);
+        }
+        
+        char[] result = s.toCharArray();
+        
+        // Sort characters inside each component
+        for (List<Integer> indices : map.values()) {
+            
+            List<Character> chars = new ArrayList<>();
+            
+            for (int idx : indices) {
+                chars.add(s.charAt(idx));
+            }
+            
+            Collections.sort(indices);
+            Collections.sort(chars);
+            
+            for (int i = 0; i < indices.size(); i++) {
+                result[indices.get(i)] = chars.get(i);
+            }
+        }
+        
+        return new String(result);
+    }
+}
