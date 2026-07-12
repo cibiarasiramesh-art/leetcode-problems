@@ -1,0 +1,9 @@
+    public static boolean isPossible(int[] arr){
+        int maxLen=0, index=0, size=arr.length;
+        while(index<size){
+            if(index>maxLen)return false;
+            maxLen= Math.max(maxLen, index+arr[index]);
+            index++;
+        }
+        return true;
+    }
