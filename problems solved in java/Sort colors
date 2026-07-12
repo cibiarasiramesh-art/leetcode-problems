@@ -1,0 +1,31 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        int index=0;int endindex=nums.length-1;int startindex=0;
+        while(index<=endindex){
+            if(nums[index]==0){
+                int temp=nums[startindex];
+                 nums[startindex]=nums[index];
+                 nums[index]=temp;
+                 startindex++;
+                 index++;
+
+            }
+            else if(nums[index]==2){
+                int temp=nums[endindex];
+                nums[endindex]=nums[index];
+                nums[index]=temp;
+                endindex--;
+
+            }
+            else{
+                  index++;
+
+            }
+          
+
+        }
+        return;
+       
+        
+    }
+}
